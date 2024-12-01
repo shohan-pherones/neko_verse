@@ -1,20 +1,20 @@
-{% extends 'base.html' %}
+{% extends 'theme/base.html' %}
 
 {% block title %}{{ anime.title }} - Details{% endblock %}
 
 {% block content %}
-<h1>{{ anime.title }}</h1>
-<p><strong>Genre:</strong> {{ anime.genre }}</p>
-<p><strong>Description:</strong> {{ anime.description }}</p>
-<p><strong>Episodes:</strong> {{ anime.episodes }}</p>
+    <h1>{{ anime.title }}</h1>
+    <p><strong>Genre:</strong> {{ anime.genre }}</p>
+    <p><strong>Description:</strong> {{ anime.description }}</p>
+    <p><strong>Episodes:</strong> {{ anime.episodes }}</p>
 
-{% if anime.release_date %}
-<p><strong>Release Date:</strong> {{ anime.release_date }}</p>
-{% endif %}
-{% if anime.rating %}
-<p><strong>Rating:</strong> {{ anime.rating }}</p>
-{% endif %}
+    {% if anime.release_date %}
+        <p><strong>Release Date:</strong> {{ anime.release_date }}</p>
+    {% endif %}
+    {% if anime.rating %}
+        <p><strong>Rating:</strong> {{ anime.rating }}</p>
+    {% endif %}
 
-<a href="{% url 'anime:anime_list' %}">Back to Anime List</a>
+    <a href="{% url 'anime:anime_list' %}">Back to Anime List</a>
 
 {% endblock %}

@@ -1,18 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'theme/base.html' %}
 
-{% block title %}Anime List{% endblock %}
+{% block title %}Home | Neko Verse{% endblock %}
 
 {% block content %}
-<h1>Anime List</h1>
-<ul>
-    {% for anime in animes %}
-    <li>
-        <a href="{% url 'anime:anime_detail' anime_id=anime.id %}">
-            {{ anime.title }}
-        </a>
-    </li>
-    {% empty %}
-    <li>No anime available.</li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for anime in animes %}
+            <li>
+                <a href="{% url 'anime:anime_detail' anime_id=anime.id %}">
+                    {{ anime.title }}
+                </a>
+            </li>
+        {% empty %}
+            <li>No anime available.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
