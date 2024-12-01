@@ -6,4 +6,12 @@
   .wrapper {
     @apply max-w-screen-2xl mx-auto p-10 md:p-20;
   }
+
+  .btn-primary {
+    @apply inline-block bg-cyan-500 text-white font-semibold rounded-md hover:bg-cyan-600 transition duration-300 text-center whitespace-nowrap p-2 uppercase text-sm;
+  }
+
+  .btn-secondary {
+    @apply inline-block bg-rose-500 text-white font-semibold rounded-md hover:bg-rose-600 transition duration-300 text-center whitespace-nowrap p-2 uppercase text-sm;
+  }
 }
