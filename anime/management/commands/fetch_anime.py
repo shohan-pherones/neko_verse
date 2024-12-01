@@ -22,6 +22,7 @@ class Command(BaseCommand):
                     'image': anime_data['images']['jpg']['image_url'],
                     'youtube_url': anime_data.get('trailer', {}).get('url', ''),
                     'title': anime_data['title'],
+                    'genres': [genre['name'] for genre in anime_data.get('genres', [])],
                     'type': anime_data.get('type', ''),
                     'episodes': anime_data['episodes'] if 'episodes' in anime_data else 0,
                     'status': anime_data.get('status', ''),

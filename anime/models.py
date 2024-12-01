@@ -8,6 +8,7 @@ class Anime(models.Model):
     youtube_url = models.URLField(
         max_length=500, blank=True, null=True)
     title = models.CharField(max_length=200)
+    genres = models.JSONField(blank=True, null=True)
     type = models.CharField(max_length=50, blank=True, null=True)
     episodes = models.IntegerField(null=True)
     status = models.CharField(max_length=50, blank=True, null=True)

@@ -1,7 +1,14 @@
 module.exports = {
   content: ["./templates/**/*.html", "./theme/templates/**/*.html"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "space-grotesk": ["Space Grotesk", "sans-serif"],
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["cyberpunk"],
+  },
 };
