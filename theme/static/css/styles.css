@@ -4,7 +4,7 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-screen-2xl mx-auto p-10 md:p-20;
+    @apply max-w-screen-2xl mx-auto p-5 md:p-10;
   }
 
   .btn-primary {

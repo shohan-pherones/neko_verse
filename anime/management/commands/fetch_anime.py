@@ -22,7 +22,7 @@ class Command(BaseCommand):
             anime, created = Anime.objects.update_or_create(
                 id=anime_data['mal_id'],
                 defaults={
-                    'image': anime_data['images']['jpg']['image_url'],
+                    'image': anime_data['images']['jpg']['large_image_url'],
                     'youtube_url': anime_data.get('trailer', {}).get('url', ''),
                     'title': anime_data['title'],
                     'genres': genres,
