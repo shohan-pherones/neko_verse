@@ -4,41 +4,40 @@ from anime.models import Anime
 
 
 class Command(BaseCommand):
-    help = 'Fetch anime data from Jikan API and populate the Anime model'
+    help = 'Fetches anime data from Jikan API and populates the database'
 
     def handle(self, *args, **kwargs):
-        url = "https://api.jikan.moe/v4/anime"
-        params = {
-            'page': 1,
-        }
+        base_url = 'https://api.jikan.moe/v4/anime'
+        page = 1
+        while True:
+            response = requests.get(f'{base_url}?page={page}')
+            data = response.json()
 
-        response = requests.get(url, params=params)
-        data = response.json()
+            if 'data' not in data or not data['data']:
+                break
 
-        for anime_data in data['data']:
-            genres = [genre['name'] for genre in anime_data.get('genres', [])]
-            print(genres)
+            for anime in data['data']:
+                Anime.objects.get_or_create(
+                    id=anime['mal_id'],
+                    defaults={
+                        'image': anime['images']['jpg']['large_image_url'],
+                        'youtube_url': anime.get('trailer', {}).get('url', ''),
+                        'title': anime['title'],
+                        'genres': [genre['name']
+                                   for genre in anime.get('genres', [])],
+                        'type': anime.get('type', ''),
+                        'episodes': anime['episodes'] if 'episodes' in anime else 0,
+                        'status': anime.get('status', ''),
+                        'rating': anime.get('rating', ''),
+                        'score': anime.get('score', 0.00),
+                        'synopsis': anime.get('synopsis', ''),
+                        'background': anime.get('background', ''),
+                        'year': anime.get('aired', {}).get('from', '').split('-')[0] if anime.get('aired') else None
+                    }
+                )
 
-            anime, created = Anime.objects.update_or_create(
-                id=anime_data['mal_id'],
-                defaults={
-                    'image': anime_data['images']['jpg']['large_image_url'],
-                    'youtube_url': anime_data.get('trailer', {}).get('url', ''),
-                    'title': anime_data['title'],
-                    'genres': genres,
-                    'type': anime_data.get('type', ''),
-                    'episodes': anime_data['episodes'] if 'episodes' in anime_data else 0,
-                    'status': anime_data.get('status', ''),
-                    'rating': anime_data.get('rating', ''),
-                    'score': anime_data.get('score', 0.00),
-                    'synopsis': anime_data.get('synopsis', ''),
-                    'background': anime_data.get('background', ''),
-                    'year': anime_data.get('aired', {}).get('from', '').split('-')[0] if anime_data.get('aired') else None
-                }
-            )
-            if created:
-                self.stdout.write(self.style.SUCCESS(
-                    f"Anime '{anime.title}' added successfully."))
-            else:
-                self.stdout.write(self.style.SUCCESS(
-                    f"Anime '{anime.title}' updated successfully."))
+            page += 1
+            self.stdout.write(self.style.SUCCESS(f'Fetched page {page - 1}'))
+
+        self.stdout.write(self.style.SUCCESS(
+            'Successfully populated the database with anime data'))

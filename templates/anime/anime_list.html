@@ -3,7 +3,7 @@
 {% block content %}
     <section class="wrapper">
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 md:gap-10">
-            {% for anime in animes %}
+            {% for anime in page_obj %}
                 <div class="bg-white w-full rounded-lg shadow-lg p-5 flex flex-col gap-5">
                     <a href="{% url 'anime:anime_detail' anime_id=anime.id %}" class="w-full inline-block aspect-[5/4] rounded-md shadow-lg overflow-hidden relative">
                         <img src={{anime.image}} alt={{anime.title}} class="w-full h-full object-cover">
@@ -20,7 +20,26 @@
                         <a href="{% url 'anime:anime_detail' anime_id=anime.id %}" class="btn-primary">View Details</a>
                     </div>
                 </div>
+                {% empty %}
+            <p>No anime available</p>
             {% endfor %}
+        </div>
+        <div class="mt-10 flex justify-center items-center gap-2">
+                <div class="flex items-center gap-2">
+                    {% if page_obj.has_previous %}
+                    <a class="btn-primary" href="?page=1">← First</a>
+                    <a class="btn-secondary" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                </div>
+                <p>
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </p>
+                <div class="flex items-center gap-2">
+                    {% if page_obj.has_next %}
+                    <a class="btn-secondary" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a class="btn-primary" href="?page={{ page_obj.paginator.num_pages }}">Last →</a>
+                {% endif %}
+                </div>
         </div>
     </section>
 {% endblock %}
