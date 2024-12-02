@@ -9,11 +9,11 @@
     <link href="{% static 'css/output.css' %}" rel="stylesheet">
   </head>
   <body class="font-space-grotesk bg-gray-100 text-gray-700 antialiased">
-    <header><nav>Navbar</nav></header>
+    {% include "theme/header.html" %}
     <main>
       {% block content %}
       {% endblock %}
     </main>
-    <footer>Footer</footer>
+    {% include "theme/footer.html" %}
   </body>
 </html>
