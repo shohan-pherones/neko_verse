@@ -13,7 +13,7 @@ class Command(BaseCommand):
             response = requests.get(f'{base_url}?page={page}')
             data = response.json()
 
-            if 'data' not in data or not data['data']:
+            if page == 20 or 'data' not in data or not data['data']:
                 break
 
             for anime in data['data']:

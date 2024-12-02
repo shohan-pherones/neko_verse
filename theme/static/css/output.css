@@ -647,16 +647,6 @@ video {
   width: 100%;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -759,10 +749,6 @@ video {
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-}
-
-.text-center {
-  text-align: center;
 }
 
 .font-space-grotesk {
@@ -928,10 +914,6 @@ video {
 .btn-secondary:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(225 29 72 / var(--tw-bg-opacity, 1));
-}
-
-.focus-within\:border-solid:focus-within {
-  border-style: solid;
 }
 
 .focus-within\:border-cyan-500:focus-within {
