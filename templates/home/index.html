@@ -1,7 +1,21 @@
 {% extends 'theme/base.html' %}
 
 {% block content %}
-    <section class="wrapper">
-        <h1>Hello World!</h1>
-    </section>
+<section 
+    class="relative h-[calc(100vh-4rem)] bg-cover bg-center flex items-center justify-center text-center" 
+    style="background-image: url('https://images.pexels.com/photos/29455461/pexels-photo-29455461/free-photo-of-doraemon-figurine-in-soft-light-with-shadow.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');"
+>
+    <div class="bg-black/50 backdrop-blur-lg p-8 rounded-lg">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">Welcome to <span class="text-orange-500">Neko Verse</span></h1>
+        <p class="text-lg md:text-xl text-gray-200 mb-6">
+            Discover the best anime tailored just for you
+        </p>
+        <a 
+            href="{% url 'anime:anime_recommend' %}" 
+            class="btn-primary"
+        >
+            Recommend Anime
+        </a>
+    </div>
+</section>
 {% endblock content %}
